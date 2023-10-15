@@ -2,16 +2,21 @@ use core::arch::global_asm;
 
 // Needs to be defined in assembly because it can't have a function prologue
 // rax is register, 25 is RT_SIGRETURN
+//int $0x80   \n\t" ::"a"(SYS_RT_SIGRETURN) : "memory
 #[cfg(target_arch = "x86_64")]
 global_asm!(
     "
     .global __restore_rt
     __restore_rt:
-        mov rax, 25
-        int 0x80
+        push   %rbp
+        mov    %rsp,%rbp
+        mov    $0x19,%eax
+        int    $0x80
+        nop
+        pop    %rbp
+        ret    
 "
 );
-
 // x8 is register, 139 is RT_SIGRETURN
 #[cfg(target_arch = "aarch64")]
 global_asm!(
