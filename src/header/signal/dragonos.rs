@@ -8,13 +8,13 @@ global_asm!(
     "
     .global __restore_rt
     __restore_rt:
-        push   %rbp
-        mov    %rsp,%rbp
-        mov    $0x19,%eax
-        int    $0x80
-        nop
-        pop    %rbp
-        ret    
+    push   rbp
+    mov    rsp,rbp
+    mov    0x19,eax
+    int    0x80
+    nop
+    pop    rbp
+	ret    
 "
 );
 // x8 is register, 139 is RT_SIGRETURN
