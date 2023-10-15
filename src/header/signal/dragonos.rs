@@ -7,8 +7,14 @@ global_asm!(
     "
     .global __restore_rt
     __restore_rt:
+  
+        push   rbp      
+        mov    rsp,rbp    	  
         mov eax, 25
         int 0x80
+        nop
+        pop    rbp
+        ret  
 "
 );
 // int $0x80   \n\t" ::"a"(SYS_RT_SIGRETURN) : "memory
