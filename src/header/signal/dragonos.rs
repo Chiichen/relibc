@@ -9,9 +9,9 @@ global_asm!(
     __restore_rt:
   
         push   rbp      
-        mov    rsp,rbp    	  
-        mov eax, 25
-        int 0x80
+        mov    rbp,rsp
+        mov    eax, 25
+        int    0x80
         nop
         pop    rbp
         ret  
