@@ -7,17 +7,11 @@ global_asm!(
     "
     .global __restore_rt
     __restore_rt:
-  
-        push   rbp      
-        mov    rbp,rsp
-        mov    eax, 25
-        int    0x80
-        nop
-        pop    rbp
-        ret  
+        mov rax, 25
+        int 0x80
 "
 );
-// int $0x80   \n\t" ::"a"(SYS_RT_SIGRETURN) : "memory
+
 // x8 is register, 139 is RT_SIGRETURN
 #[cfg(target_arch = "aarch64")]
 global_asm!(
