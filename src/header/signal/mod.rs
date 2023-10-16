@@ -97,7 +97,6 @@ pub unsafe extern "C" fn sigaction(
         act_clone
     });
 
-    println("act={act_opt:?}");
     Sys::sigaction(sig, act_opt.as_ref(), oact.as_mut())
 }
 
